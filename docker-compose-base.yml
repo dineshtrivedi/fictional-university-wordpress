@@ -1,0 +1,59 @@
+version: '3.7'
+
+services:
+  fu_db:
+    image: mariadb:10.5.1-bionic
+    container_name: fu_db
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - ./dbdata:/var/lib/mysql
+      - ./mariadb/my.cnf:/etc/mysql/my.cnf
+    ports:
+       - "33306:3306"
+    networks:
+      - app-network
+
+  fu_nginx:
+    image: nginx:1.17.9
+    container_name: fu_nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+    depends_on:
+      - fu_web
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  fu_web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fu_web
+    environment:
+      WORDPRESS_DB_HOST: fu_db:3306
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      # You must delete wp-config.php every time there is a change in WORDPRESS_CONFIG_EXTRA
+      WORDPRESS_CONFIG_EXTRA: |
+          define('AUTOMATIC_UPDATER_DISABLED', true);
+          define('FS_METHOD','direct');
+    env_file: .env
+    volumes:
+      - ./wordpress:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+    depends_on:
+      - fu_db
+    networks:
+      - app-network
+    restart: unless-stopped
+
+
+networks:
+  app-network:
+    driver: bridge

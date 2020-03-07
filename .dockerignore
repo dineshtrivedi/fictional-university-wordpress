@@ -1,0 +1,16 @@
+.env
+.git
+docker-compose.yml
+.dockerignore
+certs/
+dbdata/
+mariadb/
+nginx/
+.composer-cache
+certbot-etc/
+certbot-var/
+wordpress/
+wp-content/themes/twentynineteen/
+wp-content/themes/twentyseventeen/
+wp-content/themes/twentysixteen/
+wp-content/themes/twentytwenty/
