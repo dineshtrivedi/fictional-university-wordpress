@@ -72,6 +72,7 @@ function dkng {
     return $exitcode
 }
 
+nvm install
 
 _create_git_aliases
 
