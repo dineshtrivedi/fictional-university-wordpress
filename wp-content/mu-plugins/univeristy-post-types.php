@@ -5,7 +5,7 @@ function university_post_types() {
         // show_in_rest for Gutenberg editor
         // 'show_in_rest' => true,
         'supports' => array(
-            'tittle',
+            'title',
             'editor',
             'excerpt',
             // 'custom-fields' -> Using Advanced Custom Fields plugin instead (advanced-custom-fields)

@@ -16,9 +16,25 @@
           <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
           <?php
+            $today =  date('Ymd');
+
             $upcomingEvents = new WP_Query(array(
-              'post_per_page' => 2,
+              'posts_per_page' => -1,
               'post_type' => 'event',
+              // custome field filter (meta_value or meta_value_num)
+              'meta_key' => 'event_date',
+              'orderby' => 'meta_value_num',
+              'meta_query' => array(
+                array(
+                  'key' => 'event_date',
+                  'compare' =>  '>=',
+                  'value' => $today,
+                  'type' => 'numeric',
+                ),
+              ),
+              // rand for random
+              // 'orderby' => 'rand',
+              'order' => 'ASC',
             ));
 
             while($upcomingEvents->have_posts()) {
@@ -56,7 +72,7 @@
           <h2 class="headline headline--small-plus t-center">From Our Blogs</h2>
           <?php
             $homePagePosts = new WP_Query(array(
-              'post_per_page' => 2,
+              'posts_per_page' => 2,
             ));
 
             while($homePagePosts->have_posts()) {
