@@ -19,7 +19,7 @@
             $today =  date('Ymd');
 
             $upcomingEvents = new WP_Query(array(
-              'posts_per_page' => -1,
+              'posts_per_page' => 2,
               'post_type' => 'event',
               // custome field filter (meta_value or meta_value_num)
               'meta_key' => 'event_date',
