@@ -38,8 +38,8 @@ gulp.task('watch', () => {
     ghostMode: false
   });
 
-  gulp.watch(settings.themeLocation + '**/*.php', (done) => {
-    console.log('Php file changed');
+  gulp.watch(settings.themeLocation + '../../**/*.php', (done) => {
+    console.log('Php file has changed in wp-content folder');
     browserSync.reload();
     done();
   });
