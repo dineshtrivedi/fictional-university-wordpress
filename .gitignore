@@ -17,3 +17,5 @@ wp-content/themes/twentysixteen/
 wp-content/themes/twentytwenty/
 wp-content/themes/siteorigin-unwind/header.php
 wp-content/cache/
+node_modules
+wp-content/themes/fictional-university/style.css
