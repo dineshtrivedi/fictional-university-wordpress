@@ -2,6 +2,9 @@
 
 function university_post_types() {
     register_post_type('event', array(
+        // show_in_rest for Gutenberg editor
+        // 'show_in_rest' => true,
+        'supports' => array('tittle', 'editor', 'excerpt'),
         'rewrite' => array(
             'slug' => 'events'
         ),
