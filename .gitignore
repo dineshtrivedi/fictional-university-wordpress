@@ -20,3 +20,4 @@ wp-content/cache/
 node_modules
 wp-content/themes/fictional-university/style.css
 wp-content/themes/fictional-university/js/scripts-bundled.js
+.vscode
