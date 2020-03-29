@@ -8,6 +8,7 @@ export PROJ_BASE="$(dirname "${BASH_SOURCE[0]}")"
 CD=$(pwd)
 cd $PROJ_BASE
 export PROJ_BASE=$(pwd)
+export THEME_FOLDER="$PROJ_BASE"/wp-content/themes/fictional-university/
 cd $CD
 
 . helpers/git_aliases.sh
@@ -17,11 +18,17 @@ function devhelp {
     echo -e ""
     echo -e "${GREEN}dkup_dev${RESTORE}                             [DEV]Builds and starts docker containers${RESTORE}"
     echo -e ""
-    echo -e "${GREEN}dk <command>${RESTORE}                         It runs the command inside php docker in the default workdir(/var/www/html)${RESTORE}"
+    echo -e "${GREEN}dk <command>${RESTORE}                         It runs the command inside php docker in the default workdir(/var/www/html)"
     echo -e "                                     Example:"
     echo -e "                                       dk ${RED}bash${RESTORE}"
     echo -e ""
-    echo -e "${GREEN}docker_prune${RESTORE}                         Prunes volumes, dangling images and some other docker resources${RESTORE}"
+    echo -e "${GREEN}docker_prune${RESTORE}                         Prunes volumes, dangling images and some other docker resources"
+    echo -e ""
+    echo -e "${GREEN}hm${RESTORE}                         Goes to home project folder"
+    echo -e ""
+    echo -e "${GREEN}tm${RESTORE}                         Goes to theme folder"
+    echo -e ""
+    echo -e "${GREEN}gw${RESTORE}                         Starts dev watcher"
     echo -e ""
 }
 
@@ -68,6 +75,22 @@ function dkng {
     cd $PROJ_BASE
     docker exec -it fu_nginx $@
     exitcode=$?
+    cd $CD
+    return $exitcode
+}
+
+function tm {
+    cd $THEME_FOLDER
+}
+
+function hm {
+    cd $PROJ_BASE
+}
+
+function gw {
+    CD=$(pwd)
+    tm
+    npm run gulpwatch
     cd $CD
     return $exitcode
 }
