@@ -12,3 +12,15 @@ This repository includes some technologies, and my development enviroment prefer
 * nginx
 * mariadb
 * nvm
+
+## How to run
+Source `dev.sh` and run `dkup_dev`
+```
+. dev.sh
+dkup_dev
+```
+
+## Plugin Install
+* [advanced-custom-fields] (https://wordpress.org/plugins/advanced-custom-fields/)
+
+I will automate plugins installation and configuration soon.
