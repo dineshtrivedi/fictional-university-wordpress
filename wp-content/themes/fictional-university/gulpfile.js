@@ -38,8 +38,10 @@ gulp.task('watch', () => {
     ghostMode: false
   });
 
-  gulp.watch(settings.themeLocation + '**/*.php', () => {
+  gulp.watch(settings.themeLocation + '**/*.php', (done) => {
+    console.log('Php file changed');
     browserSync.reload();
+    done();
   });
 
   gulp.watch(settings.themeLocation + 'css/**/*.css', gulp.parallel('waitForStyles'));
@@ -53,9 +55,9 @@ gulp.task('waitForStyles', gulp.series('styles', () => {
     .pipe(browserSync.stream());
 }));
 
-gulp.task('waitForScripts', gulp.series('scripts', (cb) => {
+gulp.task('waitForScripts', gulp.series('scripts', (done) => {
   browserSync.reload();
-  cb()
+  done()
 }));
 
 gulp.task("clean", () => {
