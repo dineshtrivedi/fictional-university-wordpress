@@ -90,6 +90,7 @@ function hm {
 function gw {
     CD=$(pwd)
     tm
+    npx gulp build
     npm run gulpwatch
     cd $CD
     return $exitcode
