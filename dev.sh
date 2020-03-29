@@ -11,6 +11,9 @@ export PROJ_BASE=$(pwd)
 export THEME_FOLDER="$PROJ_BASE"/wp-content/themes/fictional-university/
 cd $CD
 
+export PROJ_UID=`id -u`
+export PROJ_GID=`id -g`
+
 . helpers/git_aliases.sh
 
 function devhelp {
@@ -22,6 +25,8 @@ function devhelp {
     echo -e "                                     Example:"
     echo -e "                                       dk ${RED}bash${RESTORE}"
     echo -e ""
+    echo -e "${GREEN}dkbuild${RESTORE}                             [DEV]Builds docker containers${RESTORE}"
+    echo -e ""
     echo -e "${GREEN}docker_prune${RESTORE}                         Prunes volumes, dangling images and some other docker resources"
     echo -e ""
     echo -e "${GREEN}hm${RESTORE}                         Goes to home project folder"
@@ -32,6 +37,15 @@ function devhelp {
     echo -e ""
 }
 
+
+function dkbuild {
+    CD=$(pwd)
+    cd $PROJ_BASE
+    docker-compose -f docker-compose-base.yml -f docker-compose-dev.yml build $@
+    exitcode=$?
+    cd $CD
+    return $exitcode
+}
 
 function dkup_dev {
     CD=$(pwd)

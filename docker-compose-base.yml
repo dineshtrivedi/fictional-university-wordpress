@@ -30,6 +30,10 @@ services:
 
   fu_web:
     build:
+      args:
+        # 1000 is the default
+        - APP_GID=${PROJ_GID:-1000}
+        - APP_UID=${PROJ_UID:-1000}
       context: .
       dockerfile: Dockerfile
     container_name: fu_web

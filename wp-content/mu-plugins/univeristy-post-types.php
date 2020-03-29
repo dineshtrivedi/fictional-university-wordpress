@@ -4,7 +4,12 @@ function university_post_types() {
     register_post_type('event', array(
         // show_in_rest for Gutenberg editor
         // 'show_in_rest' => true,
-        'supports' => array('tittle', 'editor', 'excerpt'),
+        'supports' => array(
+            'tittle',
+            'editor',
+            'excerpt',
+            // 'custom-fields' -> Using Advanced Custom Fields plugin instead (advanced-custom-fields)
+        ),
         'rewrite' => array(
             'slug' => 'events'
         ),
