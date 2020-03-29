@@ -32,6 +32,9 @@ gulp.task('scripts', (callback) => {
 
 gulp.task('watch', () => {
 
+  // Browsersync only works if there is only one body tag
+  // INCLUDING comments - https://github.com/BrowserSync/browser-sync/issues/1065#issuecomment-254180616
+  // No body tag also does not work.
   browserSync.init({
     notify: false,
     proxy: settings.urlToPreview,
